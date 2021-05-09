@@ -3,10 +3,6 @@ subprojects {
     apply plugin: 'java'
     apply plugin: 'idea'
 
-    // JVM version number requirements
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
-
     // Java will fail due to Chinese characters by default when compiled
     [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
 

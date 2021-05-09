@@ -1,8 +1,10 @@
 package com.epex.cosmos.services.utils;
 
+import com.epex.cerebro.validator.MoveValidator;
 import com.epex.cosmos.domain.ChessPiece;
 import com.epex.cosmos.domain.FEN;
 import com.epex.cosmos.domain.GameBoard;
+import com.epex.cosmos.enums.Side;
 
 public class GameUtil {
     private static final int PIECE_PLACEMENT_INDEX = 0;
@@ -67,7 +69,7 @@ public class GameUtil {
     }
 
     public static String getCastlingAvailabilitySequence(GameBoard gameBoard) {
-        String castlingAvailabiltySequence = NO_CASTLING_AVAILABILITY_MARK;
+        String castlingAvailabiltySequence = MoveValidator.isCastlingAvailableForSide(gameBoard, Side.WHITE) ? NO_CASTLING_AVAILABILITY_MARK : "Something";
         return castlingAvailabiltySequence;
     }
 
