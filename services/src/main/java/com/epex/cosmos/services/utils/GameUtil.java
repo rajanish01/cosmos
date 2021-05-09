@@ -17,7 +17,7 @@ public class GameUtil {
 
     private static final String FEN_SEPARATOR = " ";
     private static final String PIECE_PLACEMENT_SEPARATOR = "/";
-    private static final String NO_CASTLING_AVAILABILTY_MARK = "-";
+    private static final String NO_CASTLING_AVAILABILITY_MARK = "-";
 
     public static String fenGenerator(FEN fen) {
         return String.join(PIECE_PLACEMENT_SEPARATOR, fen.getPiecePlacements()) +
@@ -67,7 +67,7 @@ public class GameUtil {
     }
 
     public static String getCastlingAvailabilitySequence(GameBoard gameBoard) {
-        String castlingAvailabiltySequence = NO_CASTLING_AVAILABILTY_MARK;
+        String castlingAvailabiltySequence = NO_CASTLING_AVAILABILITY_MARK;
         return castlingAvailabiltySequence;
     }
 
