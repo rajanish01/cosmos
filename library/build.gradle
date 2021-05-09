@@ -1,10 +1,26 @@
 plugins {
     id 'java'
+    id 'maven-publish'
 }
+
+group = 'com.epex.cosmos'
+version = '0.0.1-SNAPSHOT'
 
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
+    }
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId group
+            artifactId 'cosmos-library'
+            version version
+
+            from components.java
+        }
     }
 }
 
