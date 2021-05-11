@@ -1,9 +1,11 @@
 package com.epex.cosmos.services.utils;
 
+import com.epex.cerebro.inner.MoveGenerator;
 import com.epex.cerebro.validator.MoveValidator;
 import com.epex.cosmos.domain.ChessPiece;
 import com.epex.cosmos.domain.FEN;
 import com.epex.cosmos.domain.GameBoard;
+import com.epex.cosmos.enums.CastlingType;
 import com.epex.cosmos.enums.Side;
 
 public class GameUtil {
@@ -19,7 +21,6 @@ public class GameUtil {
 
     private static final String FEN_SEPARATOR = " ";
     private static final String PIECE_PLACEMENT_SEPARATOR = "/";
-    private static final String NO_CASTLING_AVAILABILITY_MARK = "-";
 
     public static String fenGenerator(FEN fen) {
         return String.join(PIECE_PLACEMENT_SEPARATOR, fen.getPiecePlacements()) +
@@ -68,10 +69,35 @@ public class GameUtil {
         return piecePlacementSequenceList;
     }
 
-    public static String getCastlingAvailabilitySequence(GameBoard gameBoard) {
-        String castlingAvailabiltySequence = MoveValidator.isCastlingAvailableForSide(gameBoard, Side.WHITE) ? NO_CASTLING_AVAILABILITY_MARK : "Something";
-        return castlingAvailabiltySequence;
+    public static String generateCastlingAvailabilitySequence(GameBoard gameBoard) {
+        String castlingAvailabilitySequence = "";
+        if (MoveValidator.isCastlingValidForKingSide(gameBoard, Side.WHITE)) {
+            castlingAvailabilitySequence = castlingAvailabilitySequence + CastlingType.K.getSymbol();
+        }
+        if (MoveValidator.isCastlingValidForQueenSide(gameBoard, Side.WHITE)) {
+            castlingAvailabilitySequence = castlingAvailabilitySequence + CastlingType.Q.getSymbol();
+        }
+        if (MoveValidator.isCastlingValidForKingSide(gameBoard, Side.BLACK)) {
+            castlingAvailabilitySequence = castlingAvailabilitySequence + CastlingType.k.getSymbol();
+        }
+        if (MoveValidator.isCastlingValidForQueenSide(gameBoard, Side.WHITE)) {
+            castlingAvailabilitySequence = castlingAvailabilitySequence + CastlingType.q.getSymbol();
+        }
+        return castlingAvailabilitySequence.equals("") ? CastlingType.NA.getSymbol() : castlingAvailabilitySequence;
     }
+
+    public static String generateEnPassantTargetSequence(GameBoard gameBoard,Side side){
+        return MoveGenerator.enPassTarget(gameBoard,side);
+    }
+
+    public static int generateHalfMoveClock(){
+        return 1;
+    }
+
+    public static int generateFullMoveNumber(){
+        return 1;
+    }
+
 
     private static String[] splitFenSequence(String fenSequence) {
         return fenSequence.split(FEN_SEPARATOR);

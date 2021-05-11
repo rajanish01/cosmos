@@ -42,10 +42,10 @@ public class GameControlService {
         FEN fen = new FEN();
         fen.setPiecePlacements(GameUtil.generatePiecePlacementSequences(game.getGameBoard().getChessPieces()));
         fen.setActiveColor(game.getActiveSide().getCode());
-        fen.setCastlingAvailability(null);
-        fen.setEnPassantTarget(null);
-        fen.setHalfMoveClock(0);
-        fen.setFullMoveNumber(0);
+        fen.setCastlingAvailability(GameUtil.generateCastlingAvailabilitySequence(game.getGameBoard()));
+        fen.setEnPassantTarget(GameUtil.generateEnPassantTargetSequence(game.getGameBoard(), game.getActiveSide()));
+        fen.setHalfMoveClock(GameUtil.generateHalfMoveClock());
+        fen.setFullMoveNumber(GameUtil.generateFullMoveNumber());
         return fen;
     }
 
