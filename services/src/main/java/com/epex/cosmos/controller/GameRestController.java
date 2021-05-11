@@ -25,8 +25,8 @@ public class GameRestController {
 
     @PostMapping("/next")
     @ResponseBody
-    public Game getNextMove(@RequestBody Game currentState) {
-        return gameControlService.generateNextMove(currentState);
+    public void getNextMove(@RequestBody Game currentState) {
+        gameControlService.generateNextMove(currentState);
     }
 
 }

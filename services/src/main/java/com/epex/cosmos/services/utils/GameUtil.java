@@ -6,6 +6,7 @@ import com.epex.cosmos.domain.ChessPiece;
 import com.epex.cosmos.domain.FEN;
 import com.epex.cosmos.domain.GameBoard;
 import com.epex.cosmos.enums.CastlingType;
+import com.epex.cosmos.enums.Position;
 import com.epex.cosmos.enums.Side;
 
 public class GameUtil {
@@ -86,16 +87,22 @@ public class GameUtil {
         return castlingAvailabilitySequence.equals("") ? CastlingType.NA.getSymbol() : castlingAvailabilitySequence;
     }
 
-    public static String generateEnPassantTargetSequence(GameBoard gameBoard,Side side){
-        return MoveGenerator.enPassTarget(gameBoard,side);
+    public static String generateEnPassantTargetSequence(GameBoard gameBoard, Side side) {
+        return MoveGenerator.enPassTarget(gameBoard, side);
     }
 
-    public static int generateHalfMoveClock(){
+    public static int generateHalfMoveClock() {
         return 1;
     }
 
-    public static int generateFullMoveNumber(){
+    public static int generateFullMoveNumber() {
         return 1;
+    }
+
+    public static void movePiece(GameBoard gameBoard, Position oldPosition, Position newPosition) {
+        gameBoard.getChessPieces()[newPosition.getColumn()][newPosition.getRow()] =
+                gameBoard.getChessPieces()[oldPosition.getColumn()][oldPosition.getRow()];
+        gameBoard.getChessPieces()[oldPosition.getColumn()][oldPosition.getRow()] = null;
     }
 
 

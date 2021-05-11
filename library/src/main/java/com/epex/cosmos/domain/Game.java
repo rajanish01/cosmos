@@ -14,6 +14,7 @@ public class Game {
 
     private String fen;
 
+    @JsonIgnore
     private Side activeSide;
 
     public Game() {

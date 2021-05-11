@@ -2,6 +2,7 @@ package com.epex.cosmos.domain;
 
 import com.epex.cosmos.enums.Piece;
 import com.epex.cosmos.enums.Position;
+import com.epex.cosmos.enums.Side;
 import lombok.Data;
 
 @Data

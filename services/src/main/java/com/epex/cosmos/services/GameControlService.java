@@ -1,13 +1,16 @@
 package com.epex.cosmos.services;
 
+import com.epex.cerebro.inner.PermissiblePositionGenerator;
 import com.epex.cosmos.domain.FEN;
 import com.epex.cosmos.domain.Game;
+import com.epex.cosmos.enums.Position;
 import com.epex.cosmos.enums.Side;
 import com.epex.cosmos.repository.GameHistoryRepository;
 import com.epex.cosmos.services.utils.GameUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -23,15 +26,20 @@ public class GameControlService {
     public Game createNewGame(Side botAs) {
         String newGameId = generateNewGameId();
         Game game = Game.generateNewGame(newGameId, botAs);
+        generateNextMove(game);
         FEN fen = getFenFromGameBoard(game);
         game.setFen(GameUtil.fenGenerator(fen));
         return game;
     }
 
-    public Game generateNextMove(Game humanMove) {
-        // Game botMove = new Game();
-
-        return null;
+    public void generateNextMove(Game game) {
+        try {
+            List<Position> possibleMoves = PermissiblePositionGenerator
+                    .possiblePositionsForPawn(game.getGameBoard(), game.getGameBoard().getChessPieces()[2][1]);
+            GameUtil.movePiece(game.getGameBoard(), Position.fromValue(2, 1), possibleMoves.get(1));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private String generateNewGameId() {

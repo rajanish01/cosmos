@@ -21,7 +21,7 @@ public enum Position {
         this.row = row;
     }
 
-    public static Position fromValue(int row, int column) throws Exception {
+    public static Position fromValue(int column, int row) throws Exception {
         return Arrays.stream(Position.values())
                 .filter(p -> (p.row == row && p.column == column))
                 .findFirst()
