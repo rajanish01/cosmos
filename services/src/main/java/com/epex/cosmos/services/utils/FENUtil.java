@@ -48,19 +48,21 @@ public class FENUtil {
         for (var rowSequence = 0; rowSequence < piecePlacements.length; rowSequence++) {
             var placementsInRow = piecePlacements[rowSequence].toCharArray();
             var columnItr = 0;
-            for (var columnIndex = 0; columnIndex < placementsInRow.length; columnIndex++) {
-                if (Character.isDigit(placementsInRow[columnIndex])) {
-                    var emptyPlaces = Integer.parseInt(String.valueOf(placementsInRow[columnIndex]));
-                    for (var itr = 0; itr < emptyPlaces; itr++) {
-                        board.getChessPieces()[columnItr++][rowSequence] = null;
+            for (char c : placementsInRow) {
+                if (Character.isDigit(c)) {
+                    var emptyPlaces = Integer.parseInt(String.valueOf(c));
+                    while (emptyPlaces != 0) {
+                        board.getChessPieces()[columnItr][rowSequence] = null;
+                        columnItr++;
+                        emptyPlaces--;
                     }
                 } else {
-                    board.getChessPieces()[columnItr++][rowSequence] = new ChessPiece(
+                    board.getChessPieces()[columnItr][rowSequence] = new ChessPiece(
                             Piece.findByPieceIndex(
                                     PieceIndex.valueOf(
-                                            String.valueOf(
-                                                    placementsInRow[columnIndex]))),
-                            Position.fromValue(columnIndex, rowSequence));
+                                            String.valueOf(c))),
+                            Position.fromValue(columnItr, rowSequence));
+                    columnItr++;
                 }
             }
         }
