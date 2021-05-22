@@ -2,7 +2,6 @@ package com.epex.cosmos.domain;
 
 import com.epex.cosmos.enums.Piece;
 import com.epex.cosmos.enums.PieceIndex;
-import com.epex.cosmos.enums.PieceType;
 import com.epex.cosmos.enums.Position;
 import lombok.Data;
 
@@ -63,7 +62,8 @@ public class GameBoard {
         List<ChessPiece> activePiecesOnBoard = new ArrayList<>();
         for (var col = 0; col < MAX_COL; col++) {
             for (var row = 0; row < MAX_ROW; row++) {
-                if (index == board.chessPieces[col][row].getPiece().getPieceIndex()
+                if (board.chessPieces[col][row] != null
+                        && index == board.chessPieces[col][row].getPiece().getPieceIndex()
                         && board.chessPieces[col][row].isOnBoard()) {
                     activePiecesOnBoard.add(board.chessPieces[col][row]);
                 }

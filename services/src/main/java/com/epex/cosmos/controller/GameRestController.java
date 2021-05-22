@@ -23,7 +23,7 @@ public class GameRestController {
         this.gameControlService = gameControlService;
     }
 
-    @GetMapping
+    @PostMapping
     @ResponseBody
     public ResponseEntity<?> startNewGame(@RequestBody final Game newGameConfig) {
         try {

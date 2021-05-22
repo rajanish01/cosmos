@@ -19,7 +19,8 @@ public class FENUtil {
 
     /**
      * Generate FEN Object From Game
-     * @param game game object
+     *
+     * @param game        game object
      * @param activeColor
      * @return FEN Object
      */
@@ -36,28 +37,30 @@ public class FENUtil {
 
     /**
      * Generate Game Board From FEN Object
+     *
      * @param game Game Object
-     * @param fen Fen Object
+     * @param fen  Fen Object
      * @throws Exception
      */
     public static void setBoardBasedOnFen(Game game, FEN fen) throws Exception {
         var piecePlacements = fen.getPiecePlacements();
         var board = game.getGameBoard();
-        for (var row = 0; row < piecePlacements.length; row++) {
-            var placementsInRow = piecePlacements[row].toCharArray();
-            for (var col = 0; col < placementsInRow.length; col++) {
-                if (Character.isDigit(placementsInRow[col])) {
-                    var emptyPlaces = Integer.parseInt(String.valueOf(placementsInRow[col]));
+        for (var rowSequence = 0; rowSequence < piecePlacements.length; rowSequence++) {
+            var placementsInRow = piecePlacements[rowSequence].toCharArray();
+            var columnItr = 0;
+            for (var columnIndex = 0; columnIndex < placementsInRow.length; columnIndex++) {
+                if (Character.isDigit(placementsInRow[columnIndex])) {
+                    var emptyPlaces = Integer.parseInt(String.valueOf(placementsInRow[columnIndex]));
                     for (var itr = 0; itr < emptyPlaces; itr++) {
-                        board.getChessPieces()[col][row] = null;
+                        board.getChessPieces()[columnItr++][rowSequence] = null;
                     }
                 } else {
-                    board.getChessPieces()[col][row] = new ChessPiece(
+                    board.getChessPieces()[columnItr++][rowSequence] = new ChessPiece(
                             Piece.findByPieceIndex(
                                     PieceIndex.valueOf(
                                             String.valueOf(
-                                                    placementsInRow[0]))),
-                            Position.fromValue(col, row));
+                                                    placementsInRow[columnIndex]))),
+                            Position.fromValue(columnIndex, rowSequence));
                 }
             }
         }

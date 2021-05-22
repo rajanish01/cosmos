@@ -2,6 +2,7 @@ package com.epex.cosmos.services;
 
 import com.epex.cosmos.domain.FEN;
 import com.epex.cosmos.domain.Game;
+import com.epex.cosmos.domain.GameBoard;
 import com.epex.cosmos.enums.Side;
 import com.epex.cosmos.repository.GameHistoryRepository;
 import com.epex.cosmos.services.utils.FENUtil;
@@ -30,6 +31,7 @@ public class GameControlService {
     }
 
     public Game generateNextMove(Game game) throws Exception {
+        game.setGameBoard(new GameBoard());
         var lastMoveFen = FEN.fenParser(game.getFen());
         FENUtil.setBoardBasedOnFen(game, lastMoveFen);
         if (game.isPlayingRandom()) {

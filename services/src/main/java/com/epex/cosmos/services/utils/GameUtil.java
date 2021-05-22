@@ -27,23 +27,50 @@ public class GameUtil {
             int randomPositionSelectIndex;
             List<Position> validPositions;
             List<ChessPiece> pieces;
-            if (randomPieceTypeSelectIndex == 1) {
-                pieces = getSuitablePiece(game, PieceType.KING);
-            } else if (randomPieceTypeSelectIndex == 2) {
-                pieces = getSuitablePiece(game, PieceType.QUEEN);
-            } else if (randomPieceTypeSelectIndex == 3) {
-                pieces = getSuitablePiece(game, PieceType.BISHOP);
-            } else if (randomPieceTypeSelectIndex == 4) {
-                pieces = getSuitablePiece(game, PieceType.KNIGHT);
-            } else if (randomPieceTypeSelectIndex == 5) {
-                pieces = getSuitablePiece(game, PieceType.ROOK);
-            } else {
-                pieces = getSuitablePiece(game, PieceType.PAWN);
+            ChessPiece selectedPiece;
+            switch (randomPieceTypeSelectIndex) {
+                case 1:
+                    pieces = getSuitablePiece(game, PieceType.KING);
+                    if (pieces.isEmpty()) continue;
+                    randomPieceSelectIndex = random.nextInt(pieces.size());
+                    selectedPiece = pieces.get(randomPieceSelectIndex);
+                    validPositions = PermissiblePositionGenerator.possiblePositionsForKing(game, selectedPiece);
+                    break;
+                case 2:
+                    pieces = getSuitablePiece(game, PieceType.QUEEN);
+                    if (pieces.isEmpty()) continue;
+                    randomPieceSelectIndex = random.nextInt(pieces.size());
+                    selectedPiece = pieces.get(randomPieceSelectIndex);
+                    validPositions = PermissiblePositionGenerator.possiblePositionsForQueen(game, selectedPiece);
+                    break;
+                case 3:
+                    pieces = getSuitablePiece(game, PieceType.BISHOP);
+                    if (pieces.isEmpty()) continue;
+                    randomPieceSelectIndex = random.nextInt(pieces.size());
+                    selectedPiece = pieces.get(randomPieceSelectIndex);
+                    validPositions = PermissiblePositionGenerator.possiblePositionsForBishop(game, selectedPiece);
+                    break;
+                case 4:
+                    pieces = getSuitablePiece(game, PieceType.KNIGHT);
+                    if (pieces.isEmpty()) continue;
+                    randomPieceSelectIndex = random.nextInt(pieces.size());
+                    selectedPiece = pieces.get(randomPieceSelectIndex);
+                    validPositions = PermissiblePositionGenerator.possiblePositionsForKnight(game, selectedPiece);
+                    break;
+                case 5:
+                    pieces = getSuitablePiece(game, PieceType.ROOK);
+                    if (pieces.isEmpty()) continue;
+                    randomPieceSelectIndex = random.nextInt(pieces.size());
+                    selectedPiece = pieces.get(randomPieceSelectIndex);
+                    validPositions = PermissiblePositionGenerator.possiblePositionsForRook(game, selectedPiece);
+                    break;
+                default:
+                    pieces = getSuitablePiece(game, PieceType.PAWN);
+                    if (pieces.isEmpty()) continue;
+                    randomPieceSelectIndex = random.nextInt(pieces.size());
+                    selectedPiece = pieces.get(randomPieceSelectIndex);
+                    validPositions = PermissiblePositionGenerator.possiblePositionsForPawn(game, selectedPiece);
             }
-            if (pieces.isEmpty()) continue;
-            randomPieceSelectIndex = random.nextInt(pieces.size());
-            ChessPiece selectedPiece = pieces.get(randomPieceSelectIndex);
-            validPositions = PermissiblePositionGenerator.possiblePositionsForKing(game, selectedPiece);
             if (validPositions.isEmpty()) continue;
             randomPositionSelectIndex = random.nextInt(validPositions.size());
             movePiece(game.getGameBoard(), selectedPiece.getCurrentPosition(), validPositions.get(randomPositionSelectIndex));
