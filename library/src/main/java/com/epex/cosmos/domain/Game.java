@@ -14,20 +14,22 @@ public class Game {
 
     private String fen;
 
-    @JsonIgnore
-    private Side activeSide;
+    private Side botSide;
+
+    private boolean playingRandom;
 
     public Game() {
     }
 
-    private Game(String gameId, Side botAs) {
+    private Game(String gameId, Side botAs, boolean playingRandom) {
         this.gameId = gameId;
-        this.gameBoard = new GameBoard(botAs);
-        this.activeSide = Side.WHITE;
+        this.gameBoard = new GameBoard();
+        this.botSide = botAs;
+        this.playingRandom = playingRandom;
     }
 
-    public static Game generateNewGame(String gameId, Side botAs) {
-        return new Game(gameId, botAs);
+    public static Game generateNewGame(String gameId, Side botAs, boolean playingRandom) {
+        return new Game(gameId, botAs, playingRandom);
     }
 
 }
