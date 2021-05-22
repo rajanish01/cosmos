@@ -1,11 +1,19 @@
 package com.epex.cosmos.domain;
 
 import com.epex.cosmos.enums.Piece;
+import com.epex.cosmos.enums.PieceIndex;
+import com.epex.cosmos.enums.PieceType;
 import com.epex.cosmos.enums.Position;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 public class GameBoard {
+
+    private static final int MAX_ROW = 8;
+    private static final int MAX_COL = 8;
 
     private ChessPiece[][] chessPieces = new ChessPiece[8][8];
 
@@ -49,6 +57,19 @@ public class GameBoard {
         chessPieces[6][7] = new ChessPiece(Piece.wn, Position.G1);     //KNIGHT
         chessPieces[7][7] = new ChessPiece(Piece.wr, Position.H1);     //ROOK
 
+    }
+
+    public static List<ChessPiece> getPiecesTypeOnBoard(GameBoard board, PieceIndex index) {
+        List<ChessPiece> activePiecesOnBoard = new ArrayList<>();
+        for (var col = 0; col < MAX_COL; col++) {
+            for (var row = 0; row < MAX_ROW; row++) {
+                if (index == board.chessPieces[col][row].getPiece().getPieceIndex()
+                        && board.chessPieces[col][row].isOnBoard()) {
+                    activePiecesOnBoard.add(board.chessPieces[col][row]);
+                }
+            }
+        }
+        return activePiecesOnBoard;
     }
 
 }

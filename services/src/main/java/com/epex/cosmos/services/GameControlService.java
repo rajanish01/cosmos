@@ -5,8 +5,7 @@ import com.epex.cosmos.domain.Game;
 import com.epex.cosmos.enums.Side;
 import com.epex.cosmos.repository.GameHistoryRepository;
 import com.epex.cosmos.services.utils.FENUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.epex.cosmos.services.utils.GameUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,11 +33,11 @@ public class GameControlService {
         var lastMoveFen = FEN.fenParser(game.getFen());
         FENUtil.setBoardBasedOnFen(game, lastMoveFen);
         if (game.isPlayingRandom()) {
-
+            GameUtil.playRandom(game);
         } else {
-
+            //TODO : IMPLEMENT ACTUAL LOGIC
         }
-        //game.setFen(FENUtil.fenGenerator(l));
+        game.setFen(FEN.fenGenerator(FENUtil.generateFenFromGameBoard(game, game.getBotSide().getOtherSide())));
         return game;
     }
 

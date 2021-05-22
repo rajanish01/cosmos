@@ -24,7 +24,7 @@ public class FENUtil {
      * @return FEN Object
      */
     public static FEN generateFenFromGameBoard(Game game, Side activeColor) {
-        FEN fen = new FEN();
+        var fen = new FEN();
         fen.setPiecePlacements(FENUtil.generatePiecePlacementSequences(game.getGameBoard().getChessPieces()));
         fen.setActiveColor(activeColor.getCode());
         fen.setCastlingAvailability(FENUtil.generateCastlingAvailabilitySequence(game));
@@ -89,7 +89,7 @@ public class FENUtil {
     }
 
     public static String generateCastlingAvailabilitySequence(Game game) {
-        String castlingAvailabilitySequence = "";
+        var castlingAvailabilitySequence = "";
         if (MoveValidator.isCastlingValidForKingSide(game, Side.WHITE)) {
             castlingAvailabilitySequence = castlingAvailabilitySequence + CastlingType.K.getSymbol();
         }
@@ -115,12 +115,6 @@ public class FENUtil {
 
     public static int generateFullMoveNumber() {
         return 1;
-    }
-
-    public static void movePiece(GameBoard gameBoard, Position oldPosition, Position newPosition) {
-        gameBoard.getChessPieces()[newPosition.getColumn()][newPosition.getRow()] =
-                gameBoard.getChessPieces()[oldPosition.getColumn()][oldPosition.getRow()];
-        gameBoard.getChessPieces()[oldPosition.getColumn()][oldPosition.getRow()] = null;
     }
 
 }

@@ -12,4 +12,8 @@ public enum Side {
     public String getCode() {
         return code;
     }
+
+    public Side getOtherSide() {
+        return this.code.equals("w") ? Side.BLACK : Side.WHITE;
+    }
 }
