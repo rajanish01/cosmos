@@ -28,7 +28,7 @@ public class GameBoard {
         chessPieces[7][0] = new ChessPiece(Piece.br, Position.H8);     //ROOK
 
         chessPieces[0][1] = new ChessPiece(Piece.bp, Position.A7);     //PAWN
-        chessPieces[1][1] = new ChessPiece(Piece.bb, Position.B7);     //PAWN
+        chessPieces[1][1] = new ChessPiece(Piece.bp, Position.B7);     //PAWN
         chessPieces[2][1] = new ChessPiece(Piece.bp, Position.C7);     //PAWN
         chessPieces[3][1] = new ChessPiece(Piece.bp, Position.D7);     //PAWN
         chessPieces[4][1] = new ChessPiece(Piece.bp, Position.E7);     //PAWN

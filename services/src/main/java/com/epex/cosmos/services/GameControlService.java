@@ -22,11 +22,14 @@ public class GameControlService {
         this.gameHistoryRepository = gameHistoryRepository;
     }
 
-    public Game createNewGame(Game newGameConfig) {
+    public Game createNewGame(Game newGameConfig) throws Exception {
         String newGameId = generateNewGameId();
-        Game game = Game.generateNewGame(newGameId, newGameConfig.getBotSide(), newGameConfig.isPlayingRandom());
-        FEN fen = FENUtil.generateFenFromGameBoard(game, Side.WHITE);
+        var game = Game.generateNewGame(newGameId, newGameConfig.getBotSide(), newGameConfig.isPlayingRandom());
+        var fen = FENUtil.generateFenFromGameBoard(game, Side.WHITE);
         game.setFen(FEN.fenGenerator(fen));
+        if(newGameConfig.getBotSide() == Side.WHITE){
+            generateNextMove(game);
+        }
         return game;
     }
 
