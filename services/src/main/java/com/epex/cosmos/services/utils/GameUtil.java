@@ -29,35 +29,35 @@ public class GameUtil {
             List<ChessPiece> pieces;
             ChessPiece selectedPiece;
             switch (randomPieceTypeSelectIndex) {
-                case 11:
+                case 1:
                     pieces = getSuitablePiece(game, PieceType.KING);
                     if (pieces.isEmpty()) continue;
                     randomPieceSelectIndex = random.nextInt(pieces.size());
                     selectedPiece = pieces.get(randomPieceSelectIndex);
                     validPositions = PermissiblePositionGenerator.possiblePositionsForKing(game, selectedPiece);
                     break;
-                case 21:
+                case 2:
                     pieces = getSuitablePiece(game, PieceType.QUEEN);
                     if (pieces.isEmpty()) continue;
                     randomPieceSelectIndex = random.nextInt(pieces.size());
                     selectedPiece = pieces.get(randomPieceSelectIndex);
                     validPositions = PermissiblePositionGenerator.possiblePositionsForQueen(game, selectedPiece);
                     break;
-                case 31:
+                case 3:
                     pieces = getSuitablePiece(game, PieceType.BISHOP);
                     if (pieces.isEmpty()) continue;
                     randomPieceSelectIndex = random.nextInt(pieces.size());
                     selectedPiece = pieces.get(randomPieceSelectIndex);
                     validPositions = PermissiblePositionGenerator.possiblePositionsForBishop(game, selectedPiece);
                     break;
-                case 41:
+                case 4:
                     pieces = getSuitablePiece(game, PieceType.KNIGHT);
                     if (pieces.isEmpty()) continue;
                     randomPieceSelectIndex = random.nextInt(pieces.size());
                     selectedPiece = pieces.get(randomPieceSelectIndex);
                     validPositions = PermissiblePositionGenerator.possiblePositionsForKnight(game, selectedPiece);
                     break;
-                case 51:
+                case 5:
                     pieces = getSuitablePiece(game, PieceType.ROOK);
                     if (pieces.isEmpty()) continue;
                     randomPieceSelectIndex = random.nextInt(pieces.size());
